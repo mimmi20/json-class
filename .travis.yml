@@ -27,7 +27,6 @@ stages:
   - static code analysis
   - test
   - test with coverage
-  - integration tests
 
 before_install:
   - stty cols 130
@@ -89,13 +88,6 @@ jobs:
         - TEST=phpstan
         - COMPOSER_FLAGS=""
       script: vendor/bin/phpstan analyse -l max -c phpstan.neon --autoload-file=vendor/autoload.php --memory-limit=768M --no-progress src tests
-
-    - stage: integration tests
-      php: 7.1
-      env:
-        - TEST="phpunit - integration"
-        - COMPOSER_FLAGS=""
-      script: php -n vendor/bin/phpunit -c tests/phpunit-integration.xml --no-coverage --colors --columns 119 --verbose
 
 notifications:
   email: false

@@ -21,7 +21,7 @@
   "require": {
     "ext-json": "*",
     "php": "^7.1",
-    "daverandom/exceptional-json": "^1.0"
+    "daverandom/exceptional-json": "^1.0.1"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.13",
