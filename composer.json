@@ -1,0 +1,51 @@
+{
+  "name": "mimmi20/json-class",
+  "type": "library",
+  "description": "Class wrapper for ",
+  "keywords": [
+    "JSON"
+  ],
+  "homepage": "https://github.com/mimmi20/json-class",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thomas Müller",
+      "homepage": "https://github.com/mimmi20",
+      "role": "Developer"
+    },
+    {
+      "name": "Contributors",
+      "homepage": "https://github.com/mimmi20/json-class/graphs/contributors"
+    }
+  ],
+  "require": {
+    "ext-json": "*",
+    "php": "^7.1",
+    "daverandom/exceptional-json": "^1.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.13",
+    "pepakriz/phpstan-exception-rules": "^0.3",
+    "phpstan/phpstan": "^0.10",
+    "phpstan/phpstan-beberlei-assert": "^0.10",
+    "phpstan/phpstan-deprecation-rules": "^0.10",
+    "phpstan/phpstan-phpunit": "^0.10",
+    "phpstan/phpstan-strict-rules": "^0.10",
+    "phpunit/phpunit": "^7.3",
+    "squizlabs/php_codesniffer": "^3.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "JsonClass\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "JsonClassTest\\": "tests/"
+    }
+  },
+  "support": {
+    "issues": "https://github.com/mimmi20/json-class/issues",
+    "source": "https://github.com/mimmi20/json-class"
+  }
+}
