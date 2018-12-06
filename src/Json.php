@@ -11,7 +11,7 @@
 declare(strict_types = 1);
 namespace JsonClass;
 
-class Json
+final class Json
 {
     /**
      * Returns the JSON representation of a value.
