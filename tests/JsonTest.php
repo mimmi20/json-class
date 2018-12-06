@@ -22,7 +22,7 @@ use ExceptionalJSON\EncodeErrorException;
 use JsonClass\Json;
 use PHPUnit\Framework\TestCase;
 
-class JsonTest extends TestCase
+final class JsonTest extends TestCase
 {
     /**
      * @var Json
