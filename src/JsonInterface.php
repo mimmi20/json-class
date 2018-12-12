@@ -11,7 +11,7 @@
 declare(strict_types = 1);
 namespace JsonClass;
 
-final class Json implements JsonInterface
+interface JsonInterface
 {
     /**
      * Returns the JSON representation of a value.
@@ -24,10 +24,7 @@ final class Json implements JsonInterface
      *
      * @return string JSON encoded string
      */
-    public function encode($value, int $options = 0, int $depth = 512): string
-    {
-        return \ExceptionalJSON\encode($value, $options, $depth);
-    }
+    public function encode($value, int $options = 0, int $depth = 512): string;
 
     /**
      * Decodes a JSON string.
@@ -41,8 +38,5 @@ final class Json implements JsonInterface
      *
      * @return mixed the value encoded in JSON in appropriate PHP type
      */
-    public function decode(string $json, bool $assoc = false, int $depth = 512, int $options = 0)
-    {
-        return \ExceptionalJSON\decode($json, $assoc, $depth, $options);
-    }
+    public function decode(string $json, bool $assoc = false, int $depth = 512, int $options = 0);
 }
