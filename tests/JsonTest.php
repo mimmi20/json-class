@@ -63,7 +63,7 @@ final class JsonTest extends TestCase
      */
     public function testEncodeFail(): void
     {
-        $f = fopen(__FILE__, 'rb');
+        $f = fopen(__FILE__, 'r');
 
         $this->expectException(EncodeErrorException::class);
         $this->expectExceptionMessage('Type is not supported');
