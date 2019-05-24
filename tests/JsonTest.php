@@ -38,6 +38,8 @@ final class JsonTest extends TestCase
     }
 
     /**
+     * @throws \ExceptionalJSON\DecodeErrorException
+     *
      * @return void
      */
     public function testDecodeFail(): void
@@ -49,6 +51,10 @@ final class JsonTest extends TestCase
     }
 
     /**
+     * @throws \ExceptionalJSON\DecodeErrorException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     *
      * @return void
      */
     public function testDecode(): void
@@ -57,6 +63,8 @@ final class JsonTest extends TestCase
     }
 
     /**
+     * @throws \ExceptionalJSON\EncodeErrorException
+     *
      * @return void
      */
     public function testEncodeFail(): void
@@ -70,6 +78,10 @@ final class JsonTest extends TestCase
     }
 
     /**
+     * @throws \ExceptionalJSON\EncodeErrorException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     *
      * @return void
      */
     public function testEncode(): void
