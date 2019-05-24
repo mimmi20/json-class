@@ -36,6 +36,10 @@
     "phpunit/phpunit": "^7.5 || ^8.0",
     "squizlabs/php_codesniffer": "^3.4"
   },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
   "autoload": {
     "psr-4": {
       "JsonClass\\": "src/"
@@ -46,14 +50,10 @@
       "JsonClassTest\\": "tests/"
     }
   },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
   "support": {
     "issues": "https://github.com/mimmi20/json-class/issues",
     "source": "https://github.com/mimmi20/json-class"
-  },
-  "config": {
-    "preferred-install": "dist",
-    "sort-packages": true
-  },
-  "minimum-stability": "stable",
-  "prefer-stable": true
+  }
 }
