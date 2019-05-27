@@ -59,7 +59,7 @@ final class JsonTest extends TestCase
      */
     public function testDecode(): void
     {
-        self::assertSame('123', $this->object->decode('{"x": "123"}')->x);
+        static::assertSame('123', $this->object->decode('{"x": "123"}')->x);
     }
 
     /**
@@ -86,6 +86,6 @@ final class JsonTest extends TestCase
      */
     public function testEncode(): void
     {
-        self::assertSame('"abc"', $this->object->encode('abc', 0, -1));
+        static::assertSame('"abc"', $this->object->encode('abc', 0, -1));
     }
 }
