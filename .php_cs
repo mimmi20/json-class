@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the json-cache package.
+ * This file is part of the json-class package.
  *
  * Copyright (c) 2018-2019, Thomas Mueller <mimmi20@live.de>
  *
@@ -11,7 +11,7 @@
 declare(strict_types = 1);
 
 $header = <<<'EOF'
-This file is part of the json-cache package.
+This file is part of the json-class package.
 
 Copyright (c) 2018-2019, Thomas Mueller <mimmi20@live.de>
 
