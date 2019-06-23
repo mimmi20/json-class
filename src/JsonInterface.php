@@ -13,6 +13,9 @@ namespace JsonClass;
 
 interface JsonInterface
 {
+    public const DEFAULT_DEPTH = 512;
+    public const DEFAULT_OPTIONS = 0;
+
     /**
      * Returns the JSON representation of a value.
      *

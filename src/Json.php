@@ -24,7 +24,7 @@ final class Json implements JsonInterface
      *
      * @return string JSON encoded string
      */
-    public function encode($value, int $options = 0, int $depth = 512): string
+    public function encode($value, int $options = self::DEFAULT_OPTIONS, int $depth = self::DEFAULT_DEPTH): string
     {
         return \ExceptionalJSON\encode($value, $options, $depth);
     }
@@ -41,7 +41,7 @@ final class Json implements JsonInterface
      *
      * @return mixed the value encoded in JSON in appropriate PHP type
      */
-    public function decode(string $json, bool $assoc = false, int $depth = 512, int $options = 0)
+    public function decode(string $json, bool $assoc = false, int $depth = self::DEFAULT_DEPTH, int $options = self::DEFAULT_OPTIONS)
     {
         return \ExceptionalJSON\decode($json, $assoc, $depth, $options);
     }
