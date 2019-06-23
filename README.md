@@ -33,7 +33,7 @@ $json    = new \JsonClass\Json();
 $decoded = $json->decode();
 ```
 
-See also [daverandom/exceptional-json's decomantation](https://raw.githubusercontent.com/DaveRandom/ExceptionalJSON/master/readme.md)
+See also [daverandom/exceptional-json's documentation](https://raw.githubusercontent.com/DaveRandom/ExceptionalJSON/master/readme.md)
 
 ## Issues and feature requests
 
