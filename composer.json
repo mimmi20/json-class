@@ -25,7 +25,7 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.15",
-    "infection/infection": "^0.12.0 || ^0.13.0",
+    "infection/infection": "^0.13.6",
     "localheinz/composer-normalize": "^1.1.0",
     "localheinz/phpstan-rules": "^0.12",
     "pepakriz/phpstan-exception-rules": "^0.8",
