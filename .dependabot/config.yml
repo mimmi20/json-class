@@ -14,3 +14,6 @@ update_configs:
     commit_message:
       prefix: "Build"
       include_scope: true
+    ignored_updates:
+      - match:
+          dependency_name: "phpunit/phpunit"
