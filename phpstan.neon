@@ -10,7 +10,7 @@ parameters:
   excludes_analyse:
     - */tests/*/data/*
   ignoreErrors:
-    - '~Unused @throws ExceptionalJSON\\EncodeErrorException annotation~'
+#    - '~Unused @throws ExceptionalJSON\\EncodeErrorException annotation~'
     - '~Missing @throws ExceptionalJSON\\Exception annotation~'
   exceptionRules:
     reportUnusedCatchesOfUncheckedExceptions: false

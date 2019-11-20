@@ -1,6 +1,6 @@
 | Q                 | A
 | ------------------| ---------------
-| JsonClass version | x.y.z
+| json-class version | x.y.z
 | PHP version       | x.y.z
 
 
