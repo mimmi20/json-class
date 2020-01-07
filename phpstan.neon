@@ -22,4 +22,4 @@ includes:
   - vendor/phpstan/phpstan-phpunit/rules.neon
   - vendor/pepakriz/phpstan-exception-rules/extension.neon
   - vendor/phpstan/phpstan-deprecation-rules/rules.neon
-  - vendor/localheinz/phpstan-rules/rules.neon
+  - vendor/ergebnis/phpstan-rules/rules.neon
