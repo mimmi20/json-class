@@ -23,7 +23,7 @@ interface JsonInterface
      * @param int   $depth   user specified recursion depth
      * @param int   $options bit mask of JSON encode options
      *
-     * @throws \ExceptionalJSON\EncodeErrorException When the encode operation fails
+     * @throws \ExceptionalJSON\EncodeErrorException when the encode operation fails
      *
      * @return string JSON encoded string
      */
