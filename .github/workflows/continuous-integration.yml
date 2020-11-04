@@ -51,7 +51,9 @@ jobs:
         run: "composer update --optimize-autoloader --prefer-dist --prefer-stable --no-progress --no-interaction --no-suggest -vv ${{ matrix.dependencies }}"
 
       - name: "Run composer-normalize"
-        run: "composer normalize --dry-run"
+        uses: "docker://ergebnis/composer-normalize-action:latest"
+        with:
+          args: "--dry-run"
 
   install:
     name: "Check dependencies"
