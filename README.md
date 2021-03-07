@@ -8,7 +8,6 @@ This class add a class wrapper around [daverandom/exceptional-json](https://gith
 
 ## Code Status
 
-[![Build Status](https://travis-ci.org/mimmi20/json-class.svg?branch=master)](https://travis-ci.org/mimmi20/json-class)
 [![codecov](https://codecov.io/gh/mimmi20/json-class/branch/master/graph/badge.svg)](https://codecov.io/gh/mimmi20/json-class)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mimmi20/json-class.svg)](http://isitmaintained.com/project/mimmi20/json-class "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/mimmi20/json-class.svg)](http://isitmaintained.com/project/mimmi20/json-class "Percentage of issues still open")
