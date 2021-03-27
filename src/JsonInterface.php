@@ -9,7 +9,11 @@
  */
 
 declare(strict_types = 1);
+
 namespace JsonClass;
+
+use ExceptionalJSON\DecodeErrorException;
+use ExceptionalJSON\EncodeErrorException;
 
 interface JsonInterface
 {
@@ -23,9 +27,9 @@ interface JsonInterface
      * @param int   $depth   user specified recursion depth
      * @param int   $options bit mask of JSON encode options
      *
-     * @throws \ExceptionalJSON\EncodeErrorException when the encode operation fails
-     *
      * @return string JSON encoded string
+     *
+     * @throws EncodeErrorException when the encode operation fails
      */
     public function encode($value, int $options = 0, int $depth = 512): string;
 
@@ -37,9 +41,9 @@ interface JsonInterface
      * @param int    $depth   user specified recursion depth
      * @param int    $options bit mask of JSON decode options
      *
-     * @throws \ExceptionalJSON\DecodeErrorException when the decode operation fails
-     *
      * @return mixed the value encoded in JSON in appropriate PHP type
+     *
+     * @throws DecodeErrorException when the decode operation fails
      */
     public function decode(string $json, bool $assoc = false, int $depth = 512, int $options = 0);
 }

@@ -9,7 +9,14 @@
  */
 
 declare(strict_types = 1);
+
 namespace JsonClass;
+
+use ExceptionalJSON\DecodeErrorException;
+use ExceptionalJSON\EncodeErrorException;
+
+use function ExceptionalJSON\decode;
+use function ExceptionalJSON\encode;
 
 final class Json implements JsonInterface
 {
@@ -20,13 +27,13 @@ final class Json implements JsonInterface
      * @param int   $depth   user specified recursion depth
      * @param int   $options bit mask of JSON encode options
      *
-     * @throws \ExceptionalJSON\EncodeErrorException when the encode operation fails
-     *
      * @return string JSON encoded string
+     *
+     * @throws EncodeErrorException when the encode operation fails
      */
     public function encode($value, int $options = self::DEFAULT_OPTIONS, int $depth = self::DEFAULT_DEPTH): string
     {
-        return \ExceptionalJSON\encode($value, $options, $depth);
+        return encode($value, $options, $depth);
     }
 
     /**
@@ -37,12 +44,12 @@ final class Json implements JsonInterface
      * @param int    $depth   user specified recursion depth
      * @param int    $options bit mask of JSON decode options
      *
-     * @throws \ExceptionalJSON\DecodeErrorException when the decode operation fails
-     *
      * @return mixed the value encoded in JSON in appropriate PHP type
+     *
+     * @throws DecodeErrorException when the decode operation fails
      */
     public function decode(string $json, bool $assoc = false, int $depth = self::DEFAULT_DEPTH, int $options = self::DEFAULT_OPTIONS)
     {
-        return \ExceptionalJSON\decode($json, $assoc, $depth, $options);
+        return decode($json, $assoc, $depth, $options);
     }
 }

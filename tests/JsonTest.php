@@ -9,30 +9,29 @@
  */
 
 declare(strict_types = 1);
+
 namespace JsonClassTest;
 
 use ExceptionalJSON\DecodeErrorException;
 use ExceptionalJSON\EncodeErrorException;
 use JsonClass\Json;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
+
+use function fopen;
 
 final class JsonTest extends TestCase
 {
-    /** @var Json */
-    private $object;
+    private Json $object;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         $this->object = new Json();
     }
 
     /**
-     * @throws \ExceptionalJSON\DecodeErrorException
-     *
-     * @return void
+     * @throws DecodeErrorException
      */
     public function testDecodeFail(): void
     {
@@ -43,11 +42,9 @@ final class JsonTest extends TestCase
     }
 
     /**
-     * @throws \ExceptionalJSON\DecodeErrorException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     *
-     * @return void
+     * @throws DecodeErrorException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testDecode(): void
     {
@@ -55,9 +52,7 @@ final class JsonTest extends TestCase
     }
 
     /**
-     * @throws \ExceptionalJSON\EncodeErrorException
-     *
-     * @return void
+     * @throws EncodeErrorException
      */
     public function testEncodeFail(): void
     {
@@ -70,11 +65,9 @@ final class JsonTest extends TestCase
     }
 
     /**
-     * @throws \ExceptionalJSON\EncodeErrorException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     *
-     * @return void
+     * @throws EncodeErrorException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testEncode(): void
     {
