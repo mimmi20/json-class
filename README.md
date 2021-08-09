@@ -15,7 +15,7 @@ This class add a class wrapper around [daverandom/exceptional-json](https://gith
 
 ## Requirements
 
-This library requires PHP 7.1+.
+This library requires PHP 7.4+.
 
 ## Installation
 
