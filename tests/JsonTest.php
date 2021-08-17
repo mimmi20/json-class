@@ -14,6 +14,7 @@ namespace JsonClassTest;
 
 use ExceptionalJSON\DecodeErrorException;
 use ExceptionalJSON\EncodeErrorException;
+use ExceptionalJSON\Exception;
 use JsonClass\Json;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
@@ -53,6 +54,7 @@ final class JsonTest extends TestCase
 
     /**
      * @throws EncodeErrorException
+     * @throws Exception
      */
     public function testEncodeFail(): void
     {
@@ -68,6 +70,7 @@ final class JsonTest extends TestCase
      * @throws EncodeErrorException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
+     * @throws Exception
      */
     public function testEncode(): void
     {

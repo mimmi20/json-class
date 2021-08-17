@@ -14,6 +14,7 @@ namespace JsonClass;
 
 use ExceptionalJSON\DecodeErrorException;
 use ExceptionalJSON\EncodeErrorException;
+use ExceptionalJSON\Exception;
 
 use function ExceptionalJSON\decode;
 use function ExceptionalJSON\encode;
@@ -30,6 +31,7 @@ final class Json implements JsonInterface
      * @return string JSON encoded string
      *
      * @throws EncodeErrorException when the encode operation fails
+     * @throws Exception
      */
     public function encode($value, int $options = self::DEFAULT_OPTIONS, int $depth = self::DEFAULT_DEPTH): string
     {
