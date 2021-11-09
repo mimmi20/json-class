@@ -15,6 +15,7 @@ namespace JsonClassTest;
 use JsonClass\DecodeErrorException;
 use JsonClass\EncodeErrorException;
 use JsonClass\Json;
+use JsonClass\JsonInterface;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
@@ -22,6 +23,8 @@ use stdClass;
 
 use function assert;
 use function fopen;
+
+use const JSON_THROW_ON_ERROR;
 
 final class JsonTest extends TestCase
 {
@@ -41,6 +44,17 @@ final class JsonTest extends TestCase
         $this->expectExceptionMessage('Syntax error');
 
         $this->object->decode('\'x\': \'123\'');
+    }
+
+    /**
+     * @throws DecodeErrorException
+     */
+    public function testDecodeFailWithException(): void
+    {
+        $this->expectException(DecodeErrorException::class);
+        $this->expectExceptionMessage('Syntax error');
+
+        $this->object->decode('\'x\': \'123\'', false, JsonInterface::DEFAULT_DEPTH, JSON_THROW_ON_ERROR);
     }
 
     /**
@@ -68,6 +82,19 @@ final class JsonTest extends TestCase
         $this->expectExceptionMessage('Type is not supported');
 
         $this->object->encode($f, 0, -1);
+    }
+
+    /**
+     * @throws EncodeErrorException
+     */
+    public function testEncodeFailWithException(): void
+    {
+        $f = fopen(__FILE__, 'r');
+
+        $this->expectException(EncodeErrorException::class);
+        $this->expectExceptionMessage('Type is not supported');
+
+        $this->object->encode($f, JSON_THROW_ON_ERROR, -1);
     }
 
     /**
