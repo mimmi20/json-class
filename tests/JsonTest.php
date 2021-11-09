@@ -12,15 +12,21 @@ declare(strict_types = 1);
 
 namespace JsonClassTest;
 
-use ExceptionalJSON\DecodeErrorException;
-use ExceptionalJSON\EncodeErrorException;
-use ExceptionalJSON\Exception;
+use JsonClass\DecodeErrorException;
+use JsonClass\EncodeErrorException;
 use JsonClass\Json;
+use JsonClass\JsonInterface;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
+use stdClass;
 
+use function assert;
 use function fopen;
+
+use const JSON_ERROR_SYNTAX;
+use const JSON_ERROR_UNSUPPORTED_TYPE;
+use const JSON_THROW_ON_ERROR;
 
 final class JsonTest extends TestCase
 {
@@ -31,15 +37,34 @@ final class JsonTest extends TestCase
         $this->object = new Json();
     }
 
-    /**
-     * @throws DecodeErrorException
-     */
     public function testDecodeFail(): void
     {
-        $this->expectException(DecodeErrorException::class);
-        $this->expectExceptionMessage('Syntax error');
+        $json = '\'x\': \'123\'';
 
-        $this->object->decode('\'x\': \'123\'');
+        try {
+            $this->object->decode($json);
+
+            self::fail('DecodeErrorException expected');
+        } catch (DecodeErrorException $ex) {
+            self::assertSame('Syntax error', $ex->getMessage());
+            self::assertSame(JSON_ERROR_SYNTAX, $ex->getCode());
+            self::assertSame($json, $ex->getJson());
+        }
+    }
+
+    public function testDecodeFailWithException(): void
+    {
+        $json = '\'x\': \'123\'';
+
+        try {
+            $this->object->decode($json, false, JsonInterface::DEFAULT_DEPTH, JSON_THROW_ON_ERROR);
+
+            self::fail('DecodeErrorException expected');
+        } catch (DecodeErrorException $ex) {
+            self::assertSame('Syntax error', $ex->getMessage());
+            self::assertSame(JSON_ERROR_SYNTAX, $ex->getCode());
+            self::assertSame($json, $ex->getJson());
+        }
     }
 
     /**
@@ -49,28 +74,47 @@ final class JsonTest extends TestCase
      */
     public function testDecode(): void
     {
-        self::assertSame('123', $this->object->decode('{"x": "123"}')->x);
+        $decoded = $this->object->decode('{"x": "123"}');
+
+        assert($decoded instanceof stdClass);
+
+        self::assertSame('123', $decoded->x);
     }
 
-    /**
-     * @throws EncodeErrorException
-     * @throws Exception
-     */
     public function testEncodeFail(): void
     {
         $f = fopen(__FILE__, 'r');
 
-        $this->expectException(EncodeErrorException::class);
-        $this->expectExceptionMessage('Type is not supported');
+        try {
+            $this->object->encode($f, JsonInterface::DEFAULT_OPTIONS, -1);
 
-        $this->object->encode($f, 0, -1);
+            self::fail('EncodeErrorException expected');
+        } catch (EncodeErrorException $ex) {
+            self::assertSame('Type is not supported', $ex->getMessage());
+            self::assertSame(JSON_ERROR_UNSUPPORTED_TYPE, $ex->getCode());
+            self::assertSame($f, $ex->getValue());
+        }
+    }
+
+    public function testEncodeFailWithException(): void
+    {
+        $f = fopen(__FILE__, 'r');
+
+        try {
+            $this->object->encode($f, JSON_THROW_ON_ERROR, -1);
+
+            self::fail('EncodeErrorException expected');
+        } catch (EncodeErrorException $ex) {
+            self::assertSame('Type is not supported', $ex->getMessage());
+            self::assertSame(JSON_ERROR_UNSUPPORTED_TYPE, $ex->getCode());
+            self::assertSame($f, $ex->getValue());
+        }
     }
 
     /**
      * @throws EncodeErrorException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
-     * @throws Exception
      */
     public function testEncode(): void
     {

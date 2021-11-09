@@ -12,9 +12,6 @@ declare(strict_types = 1);
 
 namespace JsonClass;
 
-use ExceptionalJSON\DecodeErrorException;
-use ExceptionalJSON\EncodeErrorException;
-
 interface JsonInterface
 {
     public const DEFAULT_DEPTH   = 512;
@@ -26,12 +23,13 @@ interface JsonInterface
      * @param mixed $value   the value being encoded
      * @param int   $depth   user specified recursion depth
      * @param int   $options bit mask of JSON encode options
+     * @phpstan-param int<1, max> $depth
      *
      * @return string JSON encoded string
      *
      * @throws EncodeErrorException when the encode operation fails
      */
-    public function encode($value, int $options = 0, int $depth = 512): string;
+    public function encode($value, int $options = self::DEFAULT_OPTIONS, int $depth = self::DEFAULT_DEPTH): string;
 
     /**
      * Decodes a JSON string.
@@ -40,10 +38,11 @@ interface JsonInterface
      * @param bool   $assoc   when TRUE, returned objects will be converted into associative arrays
      * @param int    $depth   user specified recursion depth
      * @param int    $options bit mask of JSON decode options
+     * @phpstan-param int<1, max> $depth
      *
      * @return mixed the value encoded in JSON in appropriate PHP type
      *
      * @throws DecodeErrorException when the decode operation fails
      */
-    public function decode(string $json, bool $assoc = false, int $depth = 512, int $options = 0);
+    public function decode(string $json, bool $assoc = false, int $depth = self::DEFAULT_DEPTH, int $options = self::DEFAULT_OPTIONS);
 }
