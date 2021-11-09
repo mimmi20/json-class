@@ -12,12 +12,14 @@ declare(strict_types = 1);
 
 namespace JsonClass;
 
-use ExceptionalJSON\DecodeErrorException;
-use ExceptionalJSON\EncodeErrorException;
-use ExceptionalJSON\Exception;
+use JsonException;
 
-use function ExceptionalJSON\decode;
-use function ExceptionalJSON\encode;
+use function json_decode;
+use function json_encode;
+use function json_last_error;
+use function json_last_error_msg;
+
+use const JSON_ERROR_NONE;
 
 final class Json implements JsonInterface
 {
@@ -27,15 +29,35 @@ final class Json implements JsonInterface
      * @param mixed $value   the value being encoded
      * @param int   $depth   user specified recursion depth
      * @param int   $options bit mask of JSON encode options
+     * @phpstan-param int<1, max> $depth
      *
      * @return string JSON encoded string
      *
      * @throws EncodeErrorException when the encode operation fails
-     * @throws Exception
      */
-    public function encode($value, int $options = self::DEFAULT_OPTIONS, int $depth = self::DEFAULT_DEPTH): string
+    public function encode($value, int $options = JsonInterface::DEFAULT_OPTIONS, int $depth = JsonInterface::DEFAULT_DEPTH): string
     {
-        return encode($value, $options, $depth);
+        try {
+            $result = json_encode($value, $options, $depth);
+        } catch (JsonException $exception) {
+            $ex = new EncodeErrorException($exception->getMessage(), $exception->getCode(), $exception);
+
+            $ex->setValue($value);
+
+            throw $ex;
+        }
+
+        $code = json_last_error();
+
+        if (JSON_ERROR_NONE !== $code || false === $result) {
+            $ex = new EncodeErrorException(json_last_error_msg(), $code);
+
+            $ex->setValue($value);
+
+            throw $ex;
+        }
+
+        return $result;
     }
 
     /**
@@ -45,13 +67,34 @@ final class Json implements JsonInterface
      * @param bool   $assoc   when TRUE, returned objects will be converted into associative arrays
      * @param int    $depth   user specified recursion depth
      * @param int    $options bit mask of JSON decode options
+     * @phpstan-param int<1, max> $depth
      *
      * @return mixed the value encoded in JSON in appropriate PHP type
      *
      * @throws DecodeErrorException when the decode operation fails
      */
-    public function decode(string $json, bool $assoc = false, int $depth = self::DEFAULT_DEPTH, int $options = self::DEFAULT_OPTIONS)
+    public function decode(string $json, bool $assoc = false, int $depth = JsonInterface::DEFAULT_DEPTH, int $options = JsonInterface::DEFAULT_OPTIONS)
     {
-        return decode($json, $assoc, $depth, $options);
+        try {
+            $result = json_decode($json, $assoc, $depth, $options);
+        } catch (JsonException $exception) {
+            $ex = new DecodeErrorException($exception->getMessage(), $exception->getCode(), $exception);
+
+            $ex->setJson($json);
+
+            throw $ex;
+        }
+
+        $code = json_last_error();
+
+        if (JSON_ERROR_NONE !== $code) {
+            $ex = new DecodeErrorException(json_last_error_msg(), $code);
+
+            $ex->setJson($json);
+
+            throw $ex;
+        }
+
+        return $result;
     }
 }

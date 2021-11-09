@@ -12,14 +12,15 @@ declare(strict_types = 1);
 
 namespace JsonClassTest;
 
-use ExceptionalJSON\DecodeErrorException;
-use ExceptionalJSON\EncodeErrorException;
-use ExceptionalJSON\Exception;
+use JsonClass\DecodeErrorException;
+use JsonClass\EncodeErrorException;
 use JsonClass\Json;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
+use stdClass;
 
+use function assert;
 use function fopen;
 
 final class JsonTest extends TestCase
@@ -49,12 +50,15 @@ final class JsonTest extends TestCase
      */
     public function testDecode(): void
     {
-        self::assertSame('123', $this->object->decode('{"x": "123"}')->x);
+        $decoded = $this->object->decode('{"x": "123"}');
+
+        assert($decoded instanceof stdClass);
+
+        self::assertSame('123', $decoded->x);
     }
 
     /**
      * @throws EncodeErrorException
-     * @throws Exception
      */
     public function testEncodeFail(): void
     {
@@ -70,7 +74,6 @@ final class JsonTest extends TestCase
      * @throws EncodeErrorException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
-     * @throws Exception
      */
     public function testEncode(): void
     {
