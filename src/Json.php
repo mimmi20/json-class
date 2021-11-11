@@ -26,19 +26,19 @@ final class Json implements JsonInterface
     /**
      * Returns the JSON representation of a value.
      *
-     * @param mixed $value   the value being encoded
-     * @param int   $depth   user specified recursion depth
-     * @param int   $options bit mask of JSON encode options
+     * @param mixed $value the value being encoded
+     * @param int   $flags bit mask of JSON encode options
+     * @param int   $depth user specified recursion depth
      * @phpstan-param int<1, max> $depth
      *
      * @return string JSON encoded string
      *
      * @throws EncodeErrorException when the encode operation fails
      */
-    public function encode($value, int $options = JsonInterface::DEFAULT_OPTIONS, int $depth = JsonInterface::DEFAULT_DEPTH): string
+    public function encode($value, int $flags = JsonInterface::DEFAULT_OPTIONS, int $depth = JsonInterface::DEFAULT_DEPTH): string
     {
         try {
-            $result = json_encode($value, $options, $depth);
+            $result = json_encode($value, $flags, $depth);
         } catch (JsonException $exception) {
             $ex = new EncodeErrorException($exception->getMessage(), $exception->getCode(), $exception);
 
@@ -63,20 +63,20 @@ final class Json implements JsonInterface
     /**
      * Decodes a JSON string.
      *
-     * @param string $json    the JSON string being decoded
-     * @param bool   $assoc   when TRUE, returned objects will be converted into associative arrays
-     * @param int    $depth   user specified recursion depth
-     * @param int    $options bit mask of JSON decode options
+     * @param string $json  the JSON string being decoded
+     * @param bool   $assoc when TRUE, returned objects will be converted into associative arrays
+     * @param int    $depth user specified recursion depth
+     * @param int    $flags bit mask of JSON decode options
      * @phpstan-param int<1, max> $depth
      *
      * @return mixed the value encoded in JSON in appropriate PHP type
      *
      * @throws DecodeErrorException when the decode operation fails
      */
-    public function decode(string $json, bool $assoc = false, int $depth = JsonInterface::DEFAULT_DEPTH, int $options = JsonInterface::DEFAULT_OPTIONS)
+    public function decode(string $json, bool $assoc = false, int $depth = JsonInterface::DEFAULT_DEPTH, int $flags = JsonInterface::DEFAULT_OPTIONS)
     {
         try {
-            $result = json_decode($json, $assoc, $depth, $options);
+            $result = json_decode($json, $assoc, $depth, $flags);
         } catch (JsonException $exception) {
             $ex = new DecodeErrorException($exception->getMessage(), $exception->getCode(), $exception);
 
