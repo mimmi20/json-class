@@ -362,7 +362,7 @@ jobs:
         run: "composer update --optimize-autoloader --prefer-dist --prefer-stable --no-progress --no-interaction -v --ansi ${{ matrix.dependencies }}"
 
       - name: "Run checks with rector/rector"
-        run: "vendor/bin/rector process src tests --dry-run --ansi --no-diffs"
+        run: "vendor/bin/rector process src tests --ansi --dry-run --no-diffs"
 
   tests:
     name: "UnitTests with PHPUnit"
