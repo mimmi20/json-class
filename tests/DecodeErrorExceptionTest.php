@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 final class DecodeErrorExceptionTest extends TestCase
 {
+    private const JSON = '\'x\': \'123\'';
     private DecodeErrorException $object;
 
     protected function setUp(): void
@@ -26,10 +27,8 @@ final class DecodeErrorExceptionTest extends TestCase
 
     public function testSetGetJson(): void
     {
-        $json = '\'x\': \'123\'';
+        $this->object->setJson(self::JSON);
 
-        $this->object->setJson($json);
-
-        self::assertSame($json, $this->object->getJson());
+        self::assertSame(self::JSON, $this->object->getJson());
     }
 }

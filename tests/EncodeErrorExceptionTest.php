@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 final class EncodeErrorExceptionTest extends TestCase
 {
+    private const VALUE = '\'x\': \'123\'';
     private EncodeErrorException $object;
 
     protected function setUp(): void
@@ -26,10 +27,8 @@ final class EncodeErrorExceptionTest extends TestCase
 
     public function testSetGetJson(): void
     {
-        $value = '\'x\': \'123\'';
+        $this->object->setValue(self::VALUE);
 
-        $this->object->setValue($value);
-
-        self::assertSame($value, $this->object->getValue());
+        self::assertSame(self::VALUE, $this->object->getValue());
     }
 }
