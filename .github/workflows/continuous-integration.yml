@@ -73,6 +73,7 @@ jobs:
         php-version:
           - "7.4"
           - "8.0"
+          - "8.1"
 
         dependencies:
           - "--prefer-lowest"
@@ -81,10 +82,6 @@ jobs:
         experimental: [false]
 
         include:
-          - operating-system: "ubuntu-20.04"
-            php-version: "8.1"
-            dependencies: ""
-            experimental: true
           - operating-system: "ubuntu-20.04"
             php-version: "8.2"
             dependencies: ""
@@ -417,17 +414,10 @@ jobs:
         php-version:
           - "7.4"
           - "8.0"
+          - "8.1"
 
         dependencies:
           - ""
-
-        experimental: [false]
-
-        include:
-          - operating-system: "ubuntu-20.04"
-            php-version: "8.1"
-            dependencies: ""
-            experimental: true
 
     steps:
       - name: "Checkout"
