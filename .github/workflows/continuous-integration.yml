@@ -401,7 +401,7 @@ jobs:
 
     runs-on: "${{ matrix.operating-system }}"
 
-    continue-on-error: ${{ matrix.experimental }}
+    continue-on-error: false
 
     strategy:
       fail-fast: false
