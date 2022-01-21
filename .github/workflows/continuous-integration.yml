@@ -127,6 +127,10 @@ jobs:
             php-version: "8.2"
             dependencies: "highest"
             experimental: true
+          - operating-system: "ubuntu-20.04"
+            php-version: "8.2"
+            dependencies: "lowest"
+            experimental: true
 
     steps:
       - name: "Checkout"
@@ -490,13 +494,13 @@ jobs:
         uses: "shivammathur/setup-php@2.16.0"
         with:
           php-version: "${{ matrix.php-version }}"
-          extensions: "${{ env.PHP_EXTENSIONS }}"
+          extensions: "${{ env.PHP_EXTENSIONS }}, sodium, intl"
           ini-values: "${{ env.PHP_INI_VALUES }}"
           coverage: "none"
           tools: "${{ env.TOOLS }}"
 
       - name: "Require Roave/BackwardCompatibilityCheck"
-        run: "composer require --no-update --no-interaction --prefer-dist --prefer-stable --dev \"roave/backward-compatibility-check:6.1.0\""
+        run: "composer require --no-update --no-interaction --prefer-dist --prefer-stable --dev \"roave/backward-compatibility-check:^6.1\" \"mimmi20/coding-standard:^2.6\" \"friendsofphp/php-cs-fixer:^3.4\""
 
       - name: "Update dependencies with composer"
         uses: "ramsey/composer-install@v1"
